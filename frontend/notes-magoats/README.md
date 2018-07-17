@@ -8,7 +8,7 @@
 
 > state gets complicated, we need redux
 
-[giphy complicated state](https://tighten.co/assets/img/blog/react-part-1-state.png)
+![giphy complicated state](https://tighten.co/assets/img/blog/react-part-1-state.png)
 
 [tutorial p3 - routing/auth](https://tighten.co/blog/react-101-routing-and-auth)
 
