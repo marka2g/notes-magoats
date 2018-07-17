@@ -7,6 +7,7 @@
 [tutorial p2 - redux](https://tighten.co/blog/react-101-using-redux)
 
 > state gets complicated, we need redux
+
 ![giphy sate][complicated state]
 
 [complicated state]: (https://tighten.co/assets/img/blog/react-part-1-state.png)
