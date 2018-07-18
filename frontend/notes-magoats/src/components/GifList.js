@@ -1,5 +1,5 @@
 import React from 'react';
-import GifItem from '../components/GifItem';
+import GifItem from './GifItem';
 
 const GifList = (props) => {
   const gifItems = props.gifs.map((image) => {
