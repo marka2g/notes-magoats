@@ -21,16 +21,21 @@
 
 [check out the new folder structure](https://github.com/tightenco/react-gif-search-engine/commit/9783326d76f4ad731a9f293128a0b684618daff8)
 
-> step 1 - reducers are simply functions responsible for transforming and returning the store of our application.
+> reducers are simply functions responsible for transforming and returning the store of our application.
 notes-magoats/frontend/notes-magoats/src/reducers/gifs.js
 
-```javascript
+<!-- ```javascript
 export default function(){
   return [...];
-```
+``` -->
 
+> create rootReducer src/reducers/index.js
 
-> step 2 - create rootReducer src/reducers/index.js
+> mapDispatchToProps is the second, optional argument(in App container) you can pass to react-redux's connect()() method. It can be easy to confuse it with mapStateToProps, but they actually do two nearly-opposite things:
+
+- mapDispatchToProps() passes data *from our container to the store*. It provides the ability for the container to tell the store that it needs to change and enables this by adding action creators to our container as props.
+- mapStateToProps() passes data *to our container from our store*. It makes the result of reducers available to our container as props.
+
 
 > {}{}{}{}{}{}{}{}{}{}{}{}{}
 
