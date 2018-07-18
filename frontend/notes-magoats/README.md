@@ -64,10 +64,9 @@ The `App container` receives the updated gifs from `store` via `mapStateToProps`
 - The `GifModal` has been added back in, with `modalIsOpen` and `selectedGif` being passed through as props
 - `modalIsOpen` and `selectedGif` are being added to App's props from the Redux store via `mapDispatchToProps`
 
-
-
 > {}{}{}{}{}{}{}{}{}{}{}{}{}
 
 [tutorial p3 - routing/auth](https://tighten.co/blog/react-101-routing-and-auth)
+
 
 [tutorial p4 - firbase](https://tighten.co/blog/react-101-part-4-firebase)
