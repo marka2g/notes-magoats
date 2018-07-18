@@ -1,10 +1,16 @@
-import React from 'react';
+import React, {Component} from 'react';
 
-const GifItem = ({gif, onGifSelect}) => {
-  return (
-    <div className="gif-item" onClick={() => onGifSelect(gif)}>
-      <img src={gif.images.downsized.url} />
-    </div>
-  )
+// const GifItem = ({gif, onGifSelect}) => {
+class GifItem extends Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div className="gif-item">
+        <img src={ this.props.gif.images.downsized.url } onClick={() => this.props.onGifSelect(this.props.gif)} />
+      </div>
+    )
+  }
 }
 export default GifItem;

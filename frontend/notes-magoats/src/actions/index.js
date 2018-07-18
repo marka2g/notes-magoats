@@ -2,6 +2,8 @@ import request from 'superagent';
 
 //1. Action Type
 export const REQUEST_GIFS = 'REQUEST_GIFS';
+export const OPEN_MODAL = 'OPEN_MODAL';
+export const CLOSE_MODAL = 'CLOSE_MODAL';
 
 const API_URL = "http://api.giphy.com/v1/gifs/search?q=";
 const API_KEY = "&api_key=7bOi5OiY3WC2tETfycj2FaNDJ7t7IK88&limit=20";
@@ -17,5 +19,17 @@ export function requestGifs(term = null) {
     type: REQUEST_GIFS,
     // term
     payload: data
+  }
+}
+
+export function openModal(gif) {
+  return {
+    type: OPEN_MODAL,
+    gif
+  }
+}
+export function closeModal() {
+  return {
+    type: CLOSE_MODAL
   }
 }

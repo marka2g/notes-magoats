@@ -59,6 +59,12 @@ export default function(){
 The `App container` receives the updated gifs from `store` via `mapStateToProps` and passes it to the `GifList`
 - The `GifList` and `GifItem` components render the gifs
 
+#### [Modal - onFigSelect](https://tighten.co/blog/react-101-using-redux)
+- We're adding the `onGifSelect` prop from part one back to our `GifList` and passing in the `selectedGif` argument being sent all the way up from the `GifItem` component.
+- The `GifModal` has been added back in, with `modalIsOpen` and `selectedGif` being passed through as props
+- `modalIsOpen` and `selectedGif` are being added to App's props from the Redux store via `mapDispatchToProps`
+
+
 
 > {}{}{}{}{}{}{}{}{}{}{}{}{}
 

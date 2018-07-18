@@ -6,17 +6,25 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../actions';
 import SearchBar from '../components/SearchBar';
 import GifList from '../components/GifList';
+import GifModal from '../components/GifModal';
 import '../styles/app.css';
 
 //(removed) We are rendering our GifHardCodedTemp component and passing in gifs as props—but where is the gifs object coming from? To answer that, we need to look at the next bit of code. - hint mapStateToProps
 class App extends Component {
   // now, passing along our requestGifs action creator to our SearchBar via the onTermChange prop. This means that, whenever the onInputChange method is fired by entering or removing text in the input, our action creator will fire as well.
   // The App component renders a SearchBar, passing through the requestGifs action creator via a prop called onTermChange
+  // Modal redux additions:
+  // - We're adding the onGifSelect prop from part one back to our GifList and passing in the selectedGif argument being sent all the way up from the GifItem component.
+  // - the GifModal has been added back in, with modalIsOpen and selectedGif being passed through as props
+  // - modalIsOpen and selectedGif are being added to App's props from the Redux store via mapDispatchToProps
   render() {
     return (
       <div>
-        <SearchBar onTermChange={this.props.actions.requestGifs} />
-        <GifList gifs={this.props.gifs} />
+        <SearchBar onTermChange={ this.props.actions.requestGifs } />
+        <GifList gifs={ this.props.gifs } onGifSelect={ selectedGif => this.props.actions.openModal({selectedGif})}/>
+        <GifModal modalIsOpen={this.props.modalIsOpen}
+                  selectedGif={this.props.selectedGif}
+                  onRequestClose={ () => this.props.actions.closeModal()} />
       </div>
     );
   }
@@ -25,9 +33,18 @@ class App extends Component {
 // The mapStateToProps function is going to be passed as the first argument of the connect function we imported from react-redux. This function allows the App component to subscribe to the Redux store update; whenever the store changes, mapStateToProps is called. mapStateToProps must return a plain object, and it then becomes available on the App component as props (which we can then pass down to our GifHardCodedTemp component as this.props.gifs.)
 // But where are these gifs coming from? Way back in our combineReducers function, we set the result of the GifsReducer as part of our state with the gifs key. Here, in our mapStateToProps function, we are linking the gifs from our GifsReducer to this.props.gifs on our App component.
 function mapStateToProps(state) {
+  // this is just for visibility into props
+  console.log({
+    gifs: state.gifs.data,
+    modalIsOpen: state.modal.modalIsOpen,
+    selectedGif: state.modal.selectedGif
+  });
+
   // on init load, mapStateToProps makes the empty gifs.data array available to App under this.props.gifs
   return {
-    gifs: state.gifs.data
+    gifs: state.gifs.data,
+    modalIsOpen: state.modal.modalIsOpen,
+    selectedGif: state.modal.selectedGif
   };
 }
 
