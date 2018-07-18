@@ -1,2 +1,2 @@
-# Notes Ma🐐s(*Magoats*)
+# Notes Ma🐐s (*notes magoats*)
 Phoenix Backend/Reactjs Frontend
