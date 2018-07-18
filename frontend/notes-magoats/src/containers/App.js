@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 // Next, we need to update our App to fire our action creator function whenever the search term changes:
 import { bindActionCreators } from 'redux';
 // we're importing all (expressed with *) exported modules in our actions/index.js file as a single object, Actions. This will give us access to all of our action creators so that we can hook them into our components.
-import * as Actions from '../actions';
+import * as actions from '../actions';
 import SearchBar from '../components/SearchBar';
 import '../styles/app.css';
 
@@ -31,9 +31,9 @@ function mapStateToProps(state) {
 // But how did our App receive the requestGifs action creator? To understand this, we must look at the next bit of code:
 function mapDispatchToProps(dispatch) {
   // bindActionCreators method sets `this.props.actions` on our App
-  // bindActionCreators takes a single object whose values are action creators (in this case, our Actions object that we imported from src/actions/index.js) and wraps every action creator in a dispatch call so that they can be invoked within our container. This is how our app is notified that there is a state change.
+  // bindActionCreators takes a single object whose values are action creators (in this case, our actions object that we imported from src/actions/index.js) and wraps every action creator in a dispatch call so that they can be invoked within our container. This is how our app is notified that there is a state change.
   return {
-    actions: bindActionCreators(Actions, dispatch)
+    actions: bindActionCreators(actions, dispatch)
   }
 }
 
