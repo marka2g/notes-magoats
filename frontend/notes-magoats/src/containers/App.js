@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 // we're importing all (expressed with *) exported modules in our actions/index.js file as a single object, Actions. This will give us access to all of our action creators so that we can hook them into our components.
 import * as actions from '../actions';
 import SearchBar from '../components/SearchBar';
+import GifList from '../components/GifList';
 import '../styles/app.css';
 
 //(removed) We are rendering our GifHardCodedTemp component and passing in gifs as props—but where is the gifs object coming from? To answer that, we need to look at the next bit of code. - hint mapStateToProps
@@ -15,6 +16,7 @@ class App extends Component {
     return (
       <div>
         <SearchBar onTermChange={this.props.actions.requestGifs} />
+        <GifList gifs={this.props.gifs} />
       </div>
     );
   }
@@ -23,12 +25,14 @@ class App extends Component {
 // The mapStateToProps function is going to be passed as the first argument of the connect function we imported from react-redux. This function allows the App component to subscribe to the Redux store update; whenever the store changes, mapStateToProps is called. mapStateToProps must return a plain object, and it then becomes available on the App component as props (which we can then pass down to our GifHardCodedTemp component as this.props.gifs.)
 // But where are these gifs coming from? Way back in our combineReducers function, we set the result of the GifsReducer as part of our state with the gifs key. Here, in our mapStateToProps function, we are linking the gifs from our GifsReducer to this.props.gifs on our App component.
 function mapStateToProps(state) {
+  // on init load, mapStateToProps makes the empty gifs.data array available to App under this.props.gifs
   return {
-    gifs: state.gifs
+    gifs: state.gifs.data
   };
 }
 
 // But how did our App receive the requestGifs action creator? To understand this, we must look at the next bit of code:
+// on init load - mapDispatchToProps binds the requestGif() action creator to the App's props, making it available under this.props.actions.requestGifs
 function mapDispatchToProps(dispatch) {
   // bindActionCreators method sets `this.props.actions` on our App
   // bindActionCreators takes a single object whose values are action creators (in this case, our actions object that we imported from src/actions/index.js) and wraps every action creator in a dispatch call so that they can be invoked within our container. This is how our app is notified that there is a state change.
