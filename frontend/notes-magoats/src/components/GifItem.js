@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 
-// const GifItem = ({gif, onGifSelect}) => {
 class GifItem extends Component {
   constructor(props) {
     super(props);

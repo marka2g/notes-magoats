@@ -1,6 +1,5 @@
-import {OPEN_MODAL, CLOSE_MODAL} from '../actions';
+import * as types from '../actions/actionTypes';
 
-// these will be our default values when our app boots up. Remember, state in this context refers only to the state that our ModalReducer cares about!
 const initialState = {
   selectedGif: null,
   modalIsOpen: false
@@ -8,13 +7,13 @@ const initialState = {
 
 export default function modal(state = initialState, action) {
   switch (action.type) {
-    case OPEN_MODAL:
+    case types.OPEN_MODAL:
       return {
         ...state,
         modalIsOpen: true,
         selectedGif: action.gif.selectedGif
       };
-    case CLOSE_MODAL:
+    case types.CLOSE_MODAL:
       return {
         ...state,
         modalIsOpen: false,
