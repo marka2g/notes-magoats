@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
+// update our header to use react-router-dom's Link components to fix this:
+import { Link } from 'react-router-dom';
 
 class Header extends Component {
   render() {
@@ -7,14 +9,14 @@ class Header extends Component {
       <nav className="navbar navbar-default">
         <div className="container-fluid">
           <div className="navbar-header">
-            <a href="/" className="navbar-brand">NotesMa🐐s</a>
+            <Link to="/" className="navbar-brand">NotesMa🐐s</Link>
           </div>
-          <ul className="">
+          <ul className="nav navbar-nav navbar-right">
             <li className="nav-item">
-              <a className="nav-link" href="/login">Login</a>
+              <Link to="/login" className="nav-link" href="/login">Login</Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/signup">Sign Up!</a>
+              <Link to="/signup" className="nav-link" href="/signup">Sign Up!</Link>
             </li>
           </ul>
         </div>
