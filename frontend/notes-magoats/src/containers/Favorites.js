@@ -7,12 +7,10 @@ import GifModal from '../components/GifModal';
 import '../styles/app.css';
 
 class Favorites extends Component {
-  //  we're using this to fetch our favorite gifs as soon as the container loads.
   componentWillMount() {
     this.props.actions.fetchFavoritedGifs();
   }
   render() {
-    // Here, we're setting an isFavorite prop to "true" so that our GifItems know that the initial state on all of these components should be "favorited".
     return (
       <div>
         <GifList gifs={ this.props.gifs }

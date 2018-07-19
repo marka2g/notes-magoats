@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-// update our header to use react-router-dom's Link components to fix this:
 import { Link } from 'react-router-dom';
 import * as actions from '../actions';
 

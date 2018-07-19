@@ -17,16 +17,6 @@ const config = {
 firebase.initializeApp(config);
 
 export function requestGifs(term = null) {
-  // console.log(term);
-  // replace with react-thunk. we installed ReduxPromise in part 2, actions in Redux are normally completely synchronous: they dispatch as soon as the action creator is fired. This can be problematic when we need to wait on the result of an external call, since we don't want the reducer to receive a promise! With ReduxPromise, we returned a promise as our payload when the action was dispatched, and then the ReduxPromise middleware works to resolve that promise and pass the result of the API call to the reducer.
-  // const data = request.get(`${API_URL}${term.replace(/\s/g, '+')}${API_KEY}`);
-  // return {
-  //   type: types.REQUEST_GIFS,
-  //   payload: data
-  // }
-
-  // What reduxThunk does, on the other hand, is force the action creator to hold off on actually dispatching the action object to the reducers until dispatch is called. reduxThunk gives us far more flexibility in the way we actually handle our actions. In essence, it gives us a trigger for our gun.
-  // Instead of calling dispatch() with an action object to send to a reducer, we can call dispatch() with another action creator function. When we create or login a user via firebase, we need to wait on the result of that call to figure out how to proceed. If the promise resolves as a success, we need to make sure our application knows that a user is logged in; if not, we need to pass along the error so the user knows what went wrong.
   return function(dispatch) {
     request.get(`${API_URL}${term.replace(/\s/g, '+')}${API_KEY}`).then(response => {
       dispatch({
@@ -56,7 +46,6 @@ export function unfavoriteGif({selectedGif}) {
   return dispatch => firebase.database().ref(userUid).remove();
 }
 
-// Here, we're using Firebase's `on` method to pass our favorited gifs into our Redux store. on is a listener that fires when the initial data is stored at the specified location (in this case, our child path with our user ID) and again every time the data changes. It passes a snapshot of this data through the callback, and we are then dispatching the value of this snapshot to our reducer.
 export function fetchFavoritedGifs() {
   return function(dispatch) {
     const userUid = firebase.auth().currentUser.uid;
@@ -98,9 +87,6 @@ export function signUpUser(credentials) {
 }
 
 export function signInUser(credentials) {
-  // return {
-  //   type: types.SIGN_IN_USER
-  // }
   return function(dispatch) {
     firebase.auth().signInWithEmailAndPassword(credentials.email, credentials.password)
       .then(response => {
@@ -114,8 +100,6 @@ export function signInUser(credentials) {
   }
 }
 
-//  bug -  if you log out, then refresh the page, it'll appear that you are signed back in But now, if you refresh the page when you're logged in, you'll see the top bar update to show "My Favorites" and "Sign Out" but still get redirected to /login. Why is this?
-// firebase is storing the logged-in user in localStorage, so if you refresh while you're signed in, you'll stay signed in. To fix this bug, we will want to be sure to call firebase's signOut() method when we log our user out so that localStorage is properly cleared, then dispatch our SIGN_OUT_USER action:
 export function signOutUser() {
   return function (dispatch) {
     firebase.auth().signOut()
@@ -128,8 +112,6 @@ export function signOutUser() {
   }
 }
 
-// We're already setting authenticated to true in our AuthReducer, but when we refresh the page, authenticated will be reset to the default of "false" if we don't have a way to verify with firebase that our user should be logged in.
-// Let's add another action to check the authentication state with the data firebase is storing for us:
 export function verifyAuth() {
   return function (dispatch) {
     firebase.auth().onAuthStateChanged(user => {
@@ -147,7 +129,6 @@ export function authUser() {
     type: types.AUTH_USER
   }
 }
-
 
 export function authError(error) {
   return {

@@ -30,7 +30,6 @@ const validate = values => {
 class Signup extends Component {
   handleFormSubmit = (values) => {
     // console.log(values);
-    // this.props.signInUser(values);
     this.props.signUpUser(values);
   };
 
@@ -72,7 +71,6 @@ class Signup extends Component {
   }
 }
 
-// Since our Signup form now cares about global application state instead of just form state, we are adding a mapStateToProps function and passing it to our react-redux connect()() method.
 function mapStateToProps(state) {
   return {
     authenticationError: state.auth.error
