@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
+import * as actions from '../actions';
 
 const validate = values => {
   const errors = {};
@@ -27,7 +29,8 @@ const validate = values => {
 
 class Signup extends Component {
   handleFormSubmit = (values) => {
-    console.log(values);
+    // console.log(values);
+    this.props.signInUser(values);
   };
 
   // renderField -> stateless function
@@ -66,7 +69,10 @@ class Signup extends Component {
   }
 }
 
-export default reduxForm({
+// also finally pulling in the react-redux connect()() decorator again, since our components now need to be connected to Redux in order to have access to our signInUser() action creator.
+// However, you may be wondering why we're not using mapDispatchToProps and bindActionCreators to add our actions to props; instead, we're just passing in Actions directly.
+// bindActionCreators actually only needs to be used when you're passing action creators down as props from a container to a component that's not aware of Redux. Since Login and Signup don't have any child components, we can just pass our action creators into reduxForm()() directly!
+export default connect(null, actions)(reduxForm({
   form: 'signup',
   validate
-})(Signup);
+})(Signup));

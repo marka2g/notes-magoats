@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
+import * as actions from '../actions';
 
 const validate = values => {
   const errors = {};
@@ -19,7 +21,8 @@ const validate = values => {
 
 class Login extends Component {
   handleFormSubmit = (values) => {
-    console.log(values);
+    // console.log(values);
+    this.props.signInUser(values);
   }
 
   renderField = ({ input, label, type, meta: { touched, error } }) => (
@@ -53,7 +56,7 @@ class Login extends Component {
 
 // because our component doesn't currently care about any state outside of the form itself (such as whether a user is actually logged in), we are going to hold off for a bit on adding our react-redux connect()() decorator.
 // for now, we have a new decorator, reduxForm()(), that connects our form to Redux. In its first set of parentheses, it takes a config object that has only one required argument: a unique name for the form. This will be set as a key on the store object returned from the formReducer.
-export default reduxForm({
+export default connect(null, actions)(reduxForm({
   form: 'login',
   validate
-})(Login);
+})(Login));
