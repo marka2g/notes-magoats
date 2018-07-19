@@ -39,7 +39,7 @@ class App extends Component {
         <div>
           <Header />
           <div className="container">
-            <Route exact path="/" component={ Home }/>
+            <PrivateRoute exact path="/" component={ Home }/>
             <PublicRoute authenticated={this.props.authenticated }  path="/signup" component={ Signup } />
             <PublicRoute authenticated={this.props.authenticated }  path="/login" component={ Login } />
             <PrivateRoute authenticated={this.props.authenticated }  path="/favorites" component={ Favorites } />
