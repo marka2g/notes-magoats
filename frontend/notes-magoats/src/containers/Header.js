@@ -37,7 +37,7 @@ class Header extends Component {
       <nav className="navbar navbar-default">
         <div className="container-fluid">
           <div className="navbar-header">
-            <Link to="/" className="navbar-brand">NotesMa🐐s</Link>
+            <Link to="/" className="navbar-brand">Notes Ma🐐s</Link>
           </div>
           <ul className="nav navbar-nav navbar-right">
             { this.renderAuthLinks() }
