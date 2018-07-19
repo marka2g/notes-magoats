@@ -100,7 +100,7 @@ export function verifyAuth() {
       if (user) {
         dispatch(authUser());
       } else {
-        dispatch(signOut)
+        dispatch(signOutUser());
       }
     });
   }
