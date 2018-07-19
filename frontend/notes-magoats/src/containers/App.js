@@ -1,44 +1,57 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
+import { ConnectedRouter } from 'react-router-redux';
+import { Route, Redirect } from 'react-router-dom';
+import { history } from './../store/configureStore';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as actions from '../actions';
-import SearchBar from '../components/SearchBar';
-import GifList from '../components/GifList';
-import GifModal from '../components/GifModal';
-import '../styles/app.css';
+
+import Header from '../containers/Header';
+import Home from '../containers/Home';
+import Signup from '../containers/Signup';
+import Login from '../containers/Login';
+import Favorites from '../containers/Favorites';
+
+const PrivateRoute = ({component: Component, authenticated, ...props}) => {
+  return (
+    <Route
+      {...props}
+      render={(props) => authenticated === true
+              ? <Component {...props} />
+              : <Redirect to={{pathname: '/login', state: {from: props.location}}} /> }
+      />
+  );
+};
+
+const PublicRoute = ({component: Component, authenticated, ...props}) => {
+  return (
+    <Route
+      {...props}
+      render={(props) => authenticated === false
+              ? <Component {...props} />
+              : <Redirect to='/favorites' /> }
+      />
+  );
+};
 
 class App extends Component {
-  render() {
+  render () {
     return (
-      <div>
-        <SearchBar onTermChange={ this.props.actions.requestGifs } />
-        <GifList gifs={ this.props.gifs } onGifSelect={ selectedGif => this.props.actions.openModal({selectedGif})}/>
-        <GifModal modalIsOpen={this.props.modalIsOpen}
-                  selectedGif={this.props.selectedGif}
-                  onRequestClose={ () => this.props.actions.closeModal()} />
-      </div>
+      <ConnectedRouter history={history}>
+        <div>
+          <Header />
+          <div className="container">
+            <Route exact path="/" component={ Home }/>
+            <PublicRoute authenticated={this.props.authenticated }  path="/signup" component={ Signup } />
+            <PublicRoute authenticated={this.props.authenticated }  path="/login" component={ Login } />
+            <PrivateRoute authenticated={this.props.authenticated }  path="/favorites" component={ Favorites } />
+          </div>
+        </div>
+      </ConnectedRouter>
     );
   }
 }
 
-function mapStateToProps(state) {
-  // console.log({
-  //   gifs: state.gifs.data,
-  //   modalIsOpen: state.modal.modalIsOpen,
-  //   selectedGif: state.modal.selectedGif
-  // });
-
-  return {
-    gifs: state.gifs.data,
-    modalIsOpen: state.modal.modalIsOpen,
-    selectedGif: state.modal.selectedGif
-  };
+const mapStateToProps = (state) => {
+  return { authenticated: state.auth.authenticated };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(actions, dispatch)
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps)(App);

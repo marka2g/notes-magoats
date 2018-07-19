@@ -25,3 +25,13 @@ export function closeModal() {
     type: types.CLOSE_MODAL
   }
 }
+export function signInUser() {
+  return {
+    type: types.SIGN_IN_USER
+  }
+}
+export function signOutUser() {
+  return {
+    type: types.SIGN_OUT_USER
+  }
+}
