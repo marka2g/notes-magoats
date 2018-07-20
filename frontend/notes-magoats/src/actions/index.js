@@ -79,7 +79,7 @@ export function signUpUser(credentials) {
         dispatch(authUser());
       })
       .catch(error => {
-        console.log(error);
+        // console.log(error);
         dispatch(authError(error));
       }
     );
@@ -93,7 +93,7 @@ export function signInUser(credentials) {
         dispatch(authUser());
       })
       .catch(error => {
-        console.log(error);
+        // console.log(error);
         dispatch(authError(error));
       }
     );

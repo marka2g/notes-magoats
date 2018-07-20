@@ -14,10 +14,6 @@ export default function gifs(state = initialState, action) {
         authenticated: true,
         error: null
       };
-    case types.SIGN_IN_USER:
-      return {
-        ...state, authenticated: true
-      };
     case types.SIGN_OUT_USER:
       return {
         ...state, authenticated: false

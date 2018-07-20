@@ -69,4 +69,4 @@ The `App container` receives the updated gifs from `store` via `mapStateToProps`
 [tutorial p3 - routing/auth](https://tighten.co/blog/react-101-routing-and-auth)
 
 
-[tutorial p4 - firbase](https://tighten.co/blog/react-101-part-4-firebase)
+[tutorial p4 - api with firebase](https://tighten.co/blog/react-101-part-4-firebase)
