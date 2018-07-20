@@ -1,13 +1,11 @@
 import request from 'superagent';
 import * as types from './actionTypes';
 import firebase from '../firebase_config';
-
-const API_URL = "http://api.giphy.com/v1/gifs/search?q=";
-const API_KEY = "&api_key=7bOi5OiY3WC2tETfycj2FaNDJ7t7IK88&limit=20";
+import giphy from '../giphy_config';
 
 export function requestGifs(term = null) {
   return function(dispatch) {
-    request.get(`${API_URL}${term.replace(/\s/g, '+')}${API_KEY}`).then(response => {
+    request.get(`${giphy.api_url}${term.replace(/\s/g, '+')}${giphy.api_key}`).then(response => {
       dispatch({
         type: types.REQUEST_GIFS,
         payload: response
