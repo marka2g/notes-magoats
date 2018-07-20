@@ -1,18 +1,10 @@
 import request from 'superagent';
 import * as types from './actionTypes';
 import firebase from 'firebase';
+import config from '../firebase_config';
 
 const API_URL = "http://api.giphy.com/v1/gifs/search?q=";
 const API_KEY = "&api_key=7bOi5OiY3WC2tETfycj2FaNDJ7t7IK88&limit=20";
-
-const config = {
-  apiKey: "AIzaSyANxbt3oibnsx_2iklHZZGf610O2h_8Ib8",
-  authDomain: "notes-magoats.firebaseapp.com",
-  databaseURL: "https://notes-magoats.firebaseio.com",
-  projectId: "notes-magoats",
-  storageBucket: "notes-magoats.appspot.com",
-  messagingSenderId: "1020814126979"
-};
 
 firebase.initializeApp(config);
 
