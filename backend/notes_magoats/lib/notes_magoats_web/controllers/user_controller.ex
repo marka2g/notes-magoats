@@ -1,10 +1,13 @@
+require IEx
+
 defmodule NotesMagoatsWeb.UserController do
   use NotesMagoatsWeb, :controller
 
   alias NotesMagoats.Accounts
   alias NotesMagoats.Accounts.User
+  alias NotesMagoats.Guardian
 
-  action_fallback NotesMagoatsWeb.FallbackController
+  action_fallback(NotesMagoatsWeb.FallbackController)
 
   def index(conn, _params) do
     users = Accounts.list_users()
@@ -12,17 +15,26 @@ defmodule NotesMagoatsWeb.UserController do
   end
 
   def create(conn, %{"user" => user_params}) do
-    with {:ok, %User{} = user} <- Accounts.create_user(user_params) do
-      conn
-      |> put_status(:created)
-      |> put_resp_header("location", user_path(conn, :show, user))
-      |> render("show.json", user: user)
+    # IEx.pry()
+    with {:ok, %User{} = user} <- Accounts.create_user(user_params),
+         {:ok, token, _claims} <- Guardian.encode_and_sign(user) do
+      conn |> render("jwt.json", jwt: token)
     end
   end
 
-  def show(conn, %{"id" => id}) do
-    user = Accounts.get_user!(id)
-    render(conn, "show.json", user: user)
+  def sign_in(conn, %{"email" => email, "password" => password}) do
+    case Accounts.token_sign_in(email, password) do
+      {:ok, token, _claims} ->
+        conn |> render("jwt.json", jwt: token)
+
+      _ ->
+        {:error, :unauthorized}
+    end
+  end
+
+  def show(conn, _params) do
+    user = Guardian.Plug.current_resource(conn)
+    conn |> render("user.json", user: user)
   end
 
   def update(conn, %{"id" => id, "user" => user_params}) do
@@ -35,6 +47,7 @@ defmodule NotesMagoatsWeb.UserController do
 
   def delete(conn, %{"id" => id}) do
     user = Accounts.get_user!(id)
+
     with {:ok, %User{}} <- Accounts.delete_user(user) do
       send_resp(conn, :no_content, "")
     end
