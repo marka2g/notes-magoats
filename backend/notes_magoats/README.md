@@ -1,19 +1,7 @@
 ## Notes Ma🐐s Phoenix Backend with JWT Auth
 
-To start your Phoenix server:
+## curls
+[curl json](https://tecadmin.net/post-json-data-with-curl-command/)
+[and here at lobos notes](https://lobotuerto.com/blog/building-a-json-api-with-phoenix-and-elixir/)
 
-  * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.create && mix ecto.migrate`
-  * Start Phoenix endpoint with `mix phx.server`
-
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
-
-Ready to run in production? Please [check our deployment guides](http://www.phoenixframework.org/docs/deployment).
-
-## Learn more
-
-  * Official website: http://www.phoenixframework.org/
-  * Guides: http://phoenixframework.org/docs/overview
-  * Docs: https://hexdocs.pm/phoenix
-  * Mailing list: http://groups.google.com/group/phoenix-talk
-  * Source: https://github.com/phoenixframework/phoenix
+`curl -H "Content-Type: application/json" -X POST -d '{"user":{"email":"some_other@email.com","password":"password", "password_confirmation": "password"}}' http://localhost:4000/api/v1/sign_up`
