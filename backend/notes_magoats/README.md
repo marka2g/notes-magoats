@@ -1,4 +1,4 @@
-# NotesMagoats
+## Notes Ma🐐s Phoenix Backend with JWT Auth
 
 To start your Phoenix server:
 
