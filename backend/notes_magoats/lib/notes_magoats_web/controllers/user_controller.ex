@@ -14,27 +14,6 @@ defmodule NotesMagoatsWeb.UserController do
     render(conn, "index.json", users: users)
   end
 
-  # def create(conn, %{"user" => user_params}) do
-  #   # with {:ok, %User{} = user} <- Accounts.create_user(user_params) do
-  #   with {:ok, %User{} = user} <- Accounts.create_user(user_params),
-  #        # conn
-  #        # |> put_status(:created)
-  #        # |> put_resp_header("location", user_path(conn, :show, user))
-  #        # |> render("show.json", user: user)
-  #        {:ok, token, _claims} <- Guardian.encode_and_sign(user) do
-  #     conn |> render("jwt.json", token)
-  #   end
-  # end
-
-  # exlination of `with/else`: https://stackoverflow.com/questions/34210281/how-to-use-the-with-keyword-in-elixir-and-what-is-it-for
-
-  # case Accounts.create_user(user_params) do
-  #   {:ok, %User{} = user} ->
-  #     case Guardian.encode_and_sign(user) do
-  #       {:ok, token, _claims} ->
-  #          conn |> render("jwt.json", jwt: token)
-  #     end
-  # end
   def create(conn, %{"user" => user_params}) do
     # IEx.pry()
     with {:ok, %User{} = user} <- Accounts.create_user(user_params),
@@ -53,10 +32,6 @@ defmodule NotesMagoatsWeb.UserController do
     end
   end
 
-  # def show(conn, %{"id" => id}) do
-  #   user = Accounts.get_user!(id)
-  #   render(conn, "show.json", user: user)
-  # end
   def show(conn, _params) do
     user = Guardian.Plug.current_resource(conn)
     conn |> render("user.json", user: user)

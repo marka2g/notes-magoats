@@ -17,9 +17,7 @@ defmodule NotesMagoats.Accounts.User do
   @doc false
   def changeset(user, attrs) do
     user
-    # |> cast(attrs, [:email, :password_hash])
     |> cast(attrs, [:email, :password, :password_confirmation])
-    # |> validate_required([:email, :password_hash])
     |> validate_required([:email, :password, :password_confirmation])
     |> validate_format(:email, ~r/@/)
     |> validate_length(:password, min: 8)
