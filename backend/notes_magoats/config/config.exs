@@ -24,7 +24,7 @@ config :logger, :console,
 # Guardian config
 config :notes_magoats, NotesMagoats.Guardian,
   issuer: "notes_magoats",
-  secret_key: "uiNGHRdb3aRmjU+cyh1ij8fevHO6IM9uAFtTMGMB+fS0Vp1OnGBKMmHWoQ2N9mQ/"
+  secret_key: "D3A9qYzHKyAlqgf5/ff8UJHJ0FqC7CFYetv2lR/3VLpZwySnq5HzA48872OtHSup"
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
